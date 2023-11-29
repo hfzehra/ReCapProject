@@ -18,6 +18,14 @@ namespace Business.Concrete
             _carService = carService;
         }
 
+        public void Add(Car car)
+        {
+            if (car.DailyPrice > 0 && car.CarName.Length > 2)
+            {
+                _carService.Add(car);
+            }
+        }
+
         public List<Car> GetAll()
         {
             return _carService.GetAll();
@@ -26,6 +34,16 @@ namespace Business.Concrete
         public Car GetByIdCar(int id)
         {
             return _carService.Get(c=>c.id==id);
+        }
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _carService.GetAll(c=>c.BrandId==id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _carService.GetAll(c=>c.ColorId==id);
         }
     }
 }
