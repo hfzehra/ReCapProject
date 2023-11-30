@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,38 +13,43 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         //Dependecy injection 
-        ICarDal _carService;
+        ICarDal _carDal;
         public CarManager(ICarDal carService)
         {
-            _carService = carService;
+            _carDal = carService;
         }
 
         public void Add(Car car)
         {
             if (car.DailyPrice > 0 && car.CarName.Length > 2)
             {
-                _carService.Add(car);
+                _carDal.Add(car);
             }
         }
 
         public List<Car> GetAll()
         {
-            return _carService.GetAll();
+            return _carDal.GetAll();
         }
 
         public Car GetByIdCar(int id)
         {
-            return _carService.Get(c=>c.id==id);
+            return _carDal.Get(c=>c.id==id);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
 
         public List<Car> GetCarsByBrandId(int id)
         {
-            return _carService.GetAll(c=>c.BrandId==id);
+            return _carDal.GetAll(c => c.BrandId == id).OrderBy(c => c.DailyPrice).ToList();
         }
 
         public List<Car> GetCarsByColorId(int id)
         {
-            return _carService.GetAll(c=>c.ColorId==id);
+            return _carDal.GetAll(c=>c.ColorId==id);
         }
     }
 }
