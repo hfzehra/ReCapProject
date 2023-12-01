@@ -1,5 +1,7 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
+using Entities.DTOs;
 
 namespace ReCapProject
 {
@@ -8,10 +10,20 @@ namespace ReCapProject
         static void Main(string[] args)
         {
             CarManager cars = new CarManager(new EfCarDal());
-            foreach (var c in cars.GetAll())
+            //foreach (var c in cars.GetAll())
+            //{
+            //    Console.WriteLine(c.Description);
+            //}
+
+            foreach(var c in cars.GetCarDetails())
             {
-                Console.WriteLine(c.Description );
+                Console.WriteLine(c.CarName + "  -   "+ c.BrandName);
             }
+
+
+            Car araba = new Car() {id=5, BrandId=4,ColorId=6,DailyPrice=3500000}; 
+            cars.Update(araba);
+
         }
     }
 }

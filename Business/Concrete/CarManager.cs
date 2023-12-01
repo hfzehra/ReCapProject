@@ -21,10 +21,16 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            if (car.DailyPrice > 0 && car.CarName.Length > 2)
+            if (car.DailyPrice > 0 || car.CarName.Length > 2)
             {
                 _carDal.Add(car);
             }
+        }
+
+        public void Delete(Car car)
+        {
+            var deletedCar = _carDal.Get(c=>c.id == car.id);
+            _carDal.Delete(deletedCar);
         }
 
         public List<Car> GetAll()
@@ -50,6 +56,15 @@ namespace Business.Concrete
         public List<Car> GetCarsByColorId(int id)
         {
             return _carDal.GetAll(c=>c.ColorId==id);
+        }
+
+        public void Update(Car car)
+        {
+            Car car1 = _carDal.Get(c=> c.id == car.id);
+            car1.DailyPrice = car.DailyPrice;
+            car1.ColorId = car.ColorId;
+            car1.BrandId = car.BrandId;
+            _carDal.Update(car1);
         }
     }
 }
