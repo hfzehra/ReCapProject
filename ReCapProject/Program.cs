@@ -15,14 +15,14 @@ namespace ReCapProject
             //    Console.WriteLine(c.Description);
             //}
 
-            foreach(var c in cars.GetCarDetails())
-            {
-                Console.WriteLine(c.CarName + "  -   "+ c.BrandName);
-            }
+            //foreach (var car in cars.GetCarDetails())
+            //{
+            //    Console.WriteLine(car.CarName +"  -  "+car.BrandName);
+            //}
 
 
-            Car araba = new Car() {id=5, BrandId=4,ColorId=6,DailyPrice=3500000}; 
-            cars.Update(araba);
+            //Car araba = new Car() {id=5, BrandId=4,ColorId=6,DailyPrice=3500000}; 
+            //cars.Update(araba);
 
         }
     }
